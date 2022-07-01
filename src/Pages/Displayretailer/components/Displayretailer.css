@@ -1,0 +1,28 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+}
+
+.displaydetails{
+    display: flex;
+    justify-content: space-around;
+}
+
+.retailerdetails{
+    margin: 10px;
+    width: 100%;
+    background-color:deepskyblue;
+    color: black;
+    padding: 15px;
+}
+
+p{
+    padding:30px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.date{
+  text-align: center;
+}
+

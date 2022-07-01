@@ -1,0 +1,22 @@
+[
+    {
+        "retailer_name"    :"IBACCO",
+        "retailer_address" :"Madurai",
+        "products"         :[]
+        
+    },
+
+    {
+       "retailer_name"     :"KFC",
+       "retailer_address"  :"coimbatore",
+       "products"          :[] 
+      
+    },
+
+    {    
+        "retailer_name"    :"DOMINOS",
+        "retailer_address" :"Chennai",
+        "products"         :[]
+    
+    }
+]

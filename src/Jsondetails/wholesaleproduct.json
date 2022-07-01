@@ -1,0 +1,22 @@
+[
+    
+        {
+            "product_name"  :"Icecream",
+            "quantity"      :"10",
+            "product_price" :"180"
+        },
+
+        {
+            "product_name"  :"Chocolate",
+            "quantity"      :"10",
+            "product_price" :"80"
+        },
+
+        {
+            "product_name"  :"Cake",
+            "quantity"      :"10",
+            "product_price" :"250"
+        }      
+
+ ]
+
