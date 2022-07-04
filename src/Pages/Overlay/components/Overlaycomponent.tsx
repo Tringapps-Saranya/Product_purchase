@@ -83,8 +83,9 @@ const Overlaycomponent = ({ currentuser, retailerAddress,open, setOpen }: curren
 
 
     const addItem = () => {
-        if (buy[fields.length - 1].product_name !== '') {
-            append({ product_id: uuidv4(), product_name: '', quantity: 1 })
+        if(buy[fields.length - 1].product_name !== '') 
+        {
+            append({product_id:uuidv4(),product_name:'',quantity:1}) 
         }
         else
             alert("Enter Valid Details")
