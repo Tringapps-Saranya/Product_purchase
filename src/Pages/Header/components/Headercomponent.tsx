@@ -5,16 +5,13 @@ import { Button } from '@mui/material';
 import Overlaycomponent from '../../Overlay/components/Overlaycomponent'
 import Displayretailer from "../../Displayretailer/components/Displayretailer";
 const Headercomponent = () => {
-    const [retailerDetails, setRetailerDetails] = useState(retailers);
+
     const [retailerName, setRetailerName] = useState("");
     const [retailerAddress, setRetailerAddress] = useState("");
 
     const [open, setOpen] = useState(false);
 
-    const handleClose = () => {
-        setOpen(false);
-    };
-
+    
     const handleClick = (retaileraddress: string, retailername: string) => {
         setOpen(!open);
         setRetailerAddress(retaileraddress);
@@ -28,10 +25,10 @@ const Headercomponent = () => {
                 </div>
                 <div>
                     {
-                        retailerDetails.map((retailers) => {
+                        retailers.map((retailer) => {
                             return (
                                 <>
-                                    <Button className="retailerbuttons" variant='contained' onClick={() => { handleClick(retailers.retailer_address, retailers.retailer_name) }}>{retailers.retailer_name}</Button>
+                                    <Button className="retailerbuttons" variant='contained' onClick={() => { handleClick(retailer.retailer_address, retailer.retailer_name) }}>{retailer.retailer_name}</Button>
                                 </>
                             )
                         })
@@ -47,3 +44,4 @@ const Headercomponent = () => {
 }
 
 export default Headercomponent
+
