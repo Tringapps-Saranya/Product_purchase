@@ -9,16 +9,16 @@ const Displayretailer = () => {
                 return(
                     <div>
                     <div className = "retailerdetails">
-                       <div> NAME    : &nbsp;&nbsp;&nbsp;&nbsp;{retailerDetail.retailer_name} </div>
-                       <div> ADDRESS : &nbsp;{retailerDetail.retailer_address} </div>
+                       <div> NAME    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {retailerDetail.retailer_name} </div>
+                       <div> ADDRESS &nbsp;&nbsp;:&nbsp;{retailerDetail.retailer_address} </div>
                     </div> 
                      <div className="productdetails">  
                         { retailerDetail.products.length !== 0 ? retailerDetail.products.map((product)=>{
                         return(
                             <div className='products'>
                                 <div className='date'>{product.purchase_date}</div>
-                                <div><label className = "fields">Name     : {product.product_name}</label></div>
-                                <div><label className = "fields">Quantity : {product.quantity}</label></div>
+                                <div><label className = "fields">Name     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : {product.product_name}</label></div>
+                                <div><label className = "fields">Quantity &nbsp;&nbsp;: {product.quantity}</label></div>
                             </div>
                         )
                        

@@ -4,7 +4,7 @@ import '../components/Headercomponent.css';
 import { Button } from '@mui/material';
 import Overlaycomponent from '../../Overlay/components/Overlaycomponent'
 import Displayretailer from "../../Displayretailer/components/Displayretailer";
-const Header = () => {
+const Headercomponent = () => {
     const [retailerDetails, setRetailerDetails] = useState(retailers);
     const [retailerName, setRetailerName] = useState("");
     const [retailerAddress, setRetailerAddress] = useState("");
@@ -31,7 +31,7 @@ const Header = () => {
                         retailerDetails.map((retailers) => {
                             return (
                                 <>
-                                    <Button sx={{ margin: '8px', backgroundColor:"#f6ead4",color:"black" ,fontWeight:"Bold"}}  variant='contained' onClick={() => { handleClick(retailers.retailer_address, retailers.retailer_name) }}>{retailers.retailer_name}</Button>
+                                    <Button className="retailerbuttons" variant='contained' onClick={() => { handleClick(retailers.retailer_address, retailers.retailer_name) }}>{retailers.retailer_name}</Button>
                                 </>
                             )
                         })
@@ -40,10 +40,10 @@ const Header = () => {
                 </div>
                 
             </div>
-            <Overlaycomponent currentuser={retailerName} open={open} setOpen={setOpen} />
+            <Overlaycomponent currentuser={retailerName} retailerAddress={retailerAddress }open={open} setOpen={setOpen} />
             <Displayretailer />
         </div>
     )
 }
 
-export default Header
+export default Headercomponent

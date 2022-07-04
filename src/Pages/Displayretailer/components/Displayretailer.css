@@ -13,7 +13,8 @@
     width: 100%;
     background-color:deepskyblue;
     color: black;
-    padding: 15px;
+    font-weight: bold;
+    padding: 30px;
 }
 
 p{
@@ -24,5 +25,16 @@ p{
 
 .date{
   text-align: center;
+  border-bottom: 2px solid black;
+  margin: 10px;
+  padding:10px;
+  font-weight: bold;
 }
+
+.products{
+    margin: 30px;
+    border: 2px solid black;
+    padding: 15px;
+}
+
 

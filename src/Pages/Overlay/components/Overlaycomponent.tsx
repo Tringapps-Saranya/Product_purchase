@@ -1,5 +1,5 @@
-import { useState, ChangeEvent } from "react"
-import { Backdrop, Box, Button, TextField } from "@mui/material";
+import { ChangeEvent } from "react"
+import { Backdrop, Box, Button, IconButton, TextField } from "@mui/material";
 import { v4 as uuidv4 } from 'uuid';
 import { useForm, useFieldArray, useWatch } from "react-hook-form";
 import { useAppSelector, useAppDispatch } from '../../../redux/hooks';
@@ -7,11 +7,13 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import { addProduct } from '../../../redux/retailerslice';
 import '../components/Overlaycomponent.css'
 
+
 type setOpenType = (type: boolean) => void
 
 type currentuserType = {
     currentuser: string,
     open: boolean,
+    retailerAddress:string
     setOpen: setOpenType
 }
 
@@ -25,13 +27,11 @@ type productType = {
     }[]
 }
 
-const Overlaycomponent = ({ currentuser, open, setOpen }: currentuserType) => {
+const Overlaycomponent = ({ currentuser, retailerAddress,open, setOpen }: currentuserType) => {
 
     const dispatch = useAppDispatch();
-    const retailerDetails = useAppSelector(state => state.retailer.retailerDetails)
     const wholesaleDetails = useAppSelector(state => state.wholesale.products)
-    const [checkProduct,setCheckProduct] = useState('')
-    const currentdate =  new Date().toLocaleDateString;
+    const currentdate = new Date().toLocaleDateString;
 
     const handleClose = () => {
         setOpen(!open);
@@ -43,7 +43,7 @@ const Overlaycomponent = ({ currentuser, open, setOpen }: currentuserType) => {
         console.log(findProduct)
         findProduct && setValue(`productDetails.${index}.product_name`, productname)
         findProduct && setValue(`productDetails.${index}.product_price`, findProduct?.product_price)
-        console.log("currentdate" , currentdate)
+        console.log("currentdate", currentdate)
         findProduct && setValue(`productDetails.${index}.purchase_date`, currentdate())
     }
 
@@ -81,16 +81,14 @@ const Overlaycomponent = ({ currentuser, open, setOpen }: currentuserType) => {
         return wholesaleDetails.find((product: any) => product.product_name === product_name)?.quantity
     }
 
-    
+
     const addItem = () => {
-        if(buy[fields.length - 1].product_name !== '') 
-        {
-            append({product_id:uuidv4(),product_name:'',quantity:1}) 
-            setCheckProduct(buy[fields.length-1].product_name)
+        if (buy[fields.length - 1].product_name !== '') {
+            append({ product_id: uuidv4(), product_name: '', quantity: 1 })
         }
-        else    
+        else
             alert("Enter Valid Details")
-        
+
     }
 
     const onSubmit = (data: productType) => {
@@ -113,10 +111,10 @@ const Overlaycomponent = ({ currentuser, open, setOpen }: currentuserType) => {
                     <Box sx={{ width: 1350, margin: "40px", height: "auto", backgroundColor: 'ivory' }}>
                         <div className="header">
                             <div className='title'>
-                                {currentuser}
+                                {currentuser},{retailerAddress}
                             </div>
                             <div>
-                                <Button sx={{ margin: '30px', backgroundColor: "#f6ead4" ,color:"black" ,fontWeight:"bold"}} variant='contained' onClick = {addItem}>Add</Button>
+                                <Button className="addbutton" variant='contained' onClick={addItem}>Add</Button>
                             </div>
                         </div>
                         <form onSubmit={handleSubmit(onSubmit)}>
@@ -129,13 +127,13 @@ const Overlaycomponent = ({ currentuser, open, setOpen }: currentuserType) => {
                                     <div className="fieldnames">Delete</div>
                                 </div>
                                 {
-                                    fields.map((fields, index) => {
+                                    fields.map((field, index) => {
                                         return (
                                             <>
 
-                                                <div key={fields.product_id}>
-                                                    <div className="productform">
-                                                       <div className="productbox">
+                                                <div key={field.product_id}>
+                                                    <div className="columns">
+                                                        <div className="fieldnames">
                                                             <select {...register(`productDetails.${index}.product_name` as const, {
                                                                 required: true
                                                             })} onChange={(event) => handleChange(event, index)}>
@@ -147,11 +145,11 @@ const Overlaycomponent = ({ currentuser, open, setOpen }: currentuserType) => {
                                                                     })
                                                                 }
                                                             </select>
-                                                        </div> 
+                                                        </div>
                                                         {buy[index]?.product_name &&
-                                                            <div className="productbox"><input type="number" placeholder="Quantity" 
+                                                            <div className="fieldnames"><input type="number" placeholder="Quantity"
                                                                 {...register(`productDetails.${index}.quantity` as const, {
-                                                                    required:  true, min:1 ,max:getQuantity(buy[index].product_name) ,
+                                                                    required: true, min: 1, max: getQuantity(buy[index].product_name),
                                                                     valueAsNumber: true
                                                                 })} />
                                                             </div>
@@ -159,9 +157,18 @@ const Overlaycomponent = ({ currentuser, open, setOpen }: currentuserType) => {
                                                         {errors.productDetails && (<p>{errors.productDetails.message}</p>)}
                                                         {buy[index]?.product_name &&
                                                             <>
-                                                                <div className="productbox">{getValues(`productDetails.${index}.product_price`)}</div>
-                                                                <div className="productbox">{getValues(`productDetails.${index}.quantity`) * (getValues(`productDetails.${index}.product_price`))}</div>
-                                                                {fields.length > 1 && <div className="productbox"><DeleteIcon sx={{color:"red"}}onClick={() => remove(index)}/></div>}
+                                                                <div className="fieldnames">{getValues(`productDetails.${index}.product_price`)}</div>
+                                                                <div className="fieldnames">{getValues(`productDetails.${index}.quantity`) * (getValues(`productDetails.${index}.product_price`))}</div>
+                                                                <div className="fieldnames">
+                                                                    <IconButton disabled={fields.length > 1 ? false : true}>
+                                                                        <DeleteIcon
+                                                                            sx={{ color: "red" }}
+                                                                            onClick={() => remove(index)}
+    
+                                                                        />
+                                                                    </IconButton>
+
+                                                                </div>
                                                             </>
                                                         }
 
@@ -170,16 +177,19 @@ const Overlaycomponent = ({ currentuser, open, setOpen }: currentuserType) => {
 
                                                 </div>
 
+
                                             </>
+
                                         )
 
                                     })
                                 }
-                                <div className="buttons">
-                                    <Button sx={{backgroundColor:"green"}} className="handlebutton" type="submit" variant="contained">Supply</Button>
-                                    <Button sx={{backgroundColor:"red"}} className="handlebutton" variant='contained' onClick={handleClose}>Cancel</Button>
-                                </div>
                             </div>
+                            <div className="buttons">
+                                <Button className="supply" type="submit" variant="contained">Supply</Button>
+                                <Button className="cancel" variant='contained' onClick={handleClose}>Cancel</Button>
+                            </div>
+
                         </form>
                     </Box>
                 </Backdrop>

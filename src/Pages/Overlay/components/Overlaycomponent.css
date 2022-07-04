@@ -15,41 +15,59 @@
 }
 
 .forms{
+    
     align-items: center;
     justify-content: center;
 }
 
 .fieldnames{
+
     font-weight: bold;
-    margin: 30px;
+    margin: 5px;
     color: black;
 }
 
 .columns{
+
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .cancel{
-    display: flex;
-    flex-direction: row-reverse;
+   background-color: red !important;
 }
 
-.removebutton {
-    background-color: blueviolet;
-    
+.cancel:hover{
+    background-color: lightgrey;
 }
+
+.supply{
+    background-color: green !important;
+}
+
+
+.supply:hover{
+    background-color: lightgrey;
+}
+
+.addbutton { 
+    margin: 30px !important;
+    background-color: #f6ead4 !important;
+    color: black !important; 
+    font-Weight: bold !important;
+
+}
+
+.addbutton:hover{
+    background-color: lightgray;
+}
+
 
 .buttons{
     display: flex;
     flex-direction: row-reverse;
     margin:40px;
     gap: 18px;
-}
-
-.handlebutton{
-    /* margin-right:40px; */
-    background-color: blueviolet;
 }
 
 .price{
@@ -60,14 +78,13 @@ input{
     width:80px;
 }
 .productbox,.fieldnames{
-    margin-left:75px;
+    margin-left:77px;
     padding:10px;
     width: 200px;
     color:black;
-    /* margin-right: 30px; */
+    justify-content: center;
 }
 
 .productform{
     display: flex;
-    justify-content: space-between;
 }

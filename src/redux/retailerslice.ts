@@ -33,14 +33,14 @@ const retailerslice = createSlice({
             console.log(action.payload)
             const current_user = action.payload.current_user;
             const newProducts = action.payload.products;
-            const retailers = [...state.retailerDetails];           
+            const retailerdetails = [...state.retailerDetails];           
             newProducts.forEach((product:any)=>{
                 product.purchase_date = new Date().toLocaleDateString();
-                retailers.find((retailer)=>retailer.retailer_name === current_user)?.products.push(product)
+                retailerdetails.find((retailer)=>retailer.retailer_name === current_user)?.products.push(product)
                 
             })
            
-            localStorage['retailers'] = JSON.stringify(retailers)
+            localStorage['retailers'] = JSON.stringify(retailerdetails)
             
         }
     }
