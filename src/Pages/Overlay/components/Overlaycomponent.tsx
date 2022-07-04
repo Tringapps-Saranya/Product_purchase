@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react"
+import {  ChangeEvent } from "react"
 import { Backdrop, Box, Button, TextField } from "@mui/material";
 import { v4 as uuidv4 } from 'uuid';
 import { useForm, useFieldArray, useWatch } from "react-hook-form";
@@ -28,9 +28,7 @@ type productType = {
 const Overlaycomponent = ({ currentuser, open, setOpen }: currentuserType) => {
 
     const dispatch = useAppDispatch();
-    const retailerDetails = useAppSelector(state => state.retailer.retailerDetails)
     const wholesaleDetails = useAppSelector(state => state.wholesale.products)
-    const [checkProduct,setCheckProduct] = useState('')
     const currentdate =  new Date().toLocaleDateString;
 
     const handleClose = () => {
@@ -86,7 +84,6 @@ const Overlaycomponent = ({ currentuser, open, setOpen }: currentuserType) => {
         if(buy[fields.length - 1].product_name !== '') 
         {
             append({product_id:uuidv4(),product_name:'',quantity:1}) 
-            setCheckProduct(buy[fields.length-1].product_name)
         }
         else    
             alert("Enter Valid Details")
@@ -129,11 +126,11 @@ const Overlaycomponent = ({ currentuser, open, setOpen }: currentuserType) => {
                                     <div className="fieldnames">Delete</div>
                                 </div>
                                 {
-                                    fields.map((fields, index) => {
+                                    fields.map((field, index) => {
                                         return (
                                             <>
 
-                                                <div key={fields.product_id}>
+                                                <div key={field.product_id}>
                                                     <div className="productform">
                                                        <div className="productbox">
                                                             <select {...register(`productDetails.${index}.product_name` as const, {
